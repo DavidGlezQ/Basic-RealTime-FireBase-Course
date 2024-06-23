@@ -11,18 +11,23 @@ import kotlin.random.Random
 class FirebaseInstance(context: Context) {
 
     private val database = Firebase.database
+    private val myRef = database.reference
+
 
     init {
         FirebaseApp.initializeApp(context)
     }
 
     fun writeOnFireBase() {
-        val myRef = database.reference
         val randomValue = Random.nextInt(1, 200)
-        myRef.setValue("My first write: $randomValue")
+        val newItem = myRef.push()
+        newItem.setValue(getGenericTodoTaskItem(randomValue = randomValue.toString()))
     }
 
     fun setUpDatabaseListener(postListener: ValueEventListener) {
         database.reference.addValueEventListener(postListener)
     }
+
+    private fun getGenericTodoTaskItem(randomValue: String) =
+        Todo(title = "Task $randomValue", description = "This is a simple description")
 }
