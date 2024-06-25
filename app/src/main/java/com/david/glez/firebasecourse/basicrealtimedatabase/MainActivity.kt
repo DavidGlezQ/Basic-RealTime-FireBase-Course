@@ -55,7 +55,9 @@ class MainActivity : AppCompatActivity() {
         binding.button.setOnClickListener {
             firebaseInstance.writeOnFireBase()
         }
-        todoAdapter = TodoAdapter()
+        todoAdapter = TodoAdapter { reference ->
+            firebaseInstance.removeFromDatabase(reference)
+        }
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = todoAdapter

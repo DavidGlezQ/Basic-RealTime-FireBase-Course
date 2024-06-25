@@ -30,4 +30,8 @@ class FirebaseInstance(context: Context) {
 
     private fun getGenericTodoTaskItem(randomValue: String) =
         Todo(title = "Task $randomValue", description = "This is a simple description")
+
+    fun removeFromDatabase(reference: String) {
+        myRef.child(reference).removeValue()
+    }
 }
