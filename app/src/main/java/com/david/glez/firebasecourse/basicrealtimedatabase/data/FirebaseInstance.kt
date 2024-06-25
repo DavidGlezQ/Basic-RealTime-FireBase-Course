@@ -34,4 +34,8 @@ class FirebaseInstance(context: Context) {
     fun removeFromDatabase(reference: String) {
         myRef.child(reference).removeValue()
     }
+
+    fun updateFromDatabase(reference: String) {
+        myRef.child(reference).child("done").setValue(true)
+    }
 }
